@@ -47,7 +47,53 @@ def _effective_traits(unit: dict[str, Any]) -> dict[str, float]:
     multiplier = 0.78 + (unit["investment"] / 100.0) * 0.42
     traits: dict[str, float] = {}
     for key, value in unit["base"]["traits"].items():
-        traits[key] = round(value * multiplier, 2)
+        traits[key] = float(round(value * multiplier, 2))
+
+    build = unit.get("build") or {}
+    roles = set(unit["base"]["roles"])
+    tags = set(unit["base"].get("tags", []))
+    detail = 0.45 + float(build.get("detailLevel", 0.0)) * 0.55
+
+    speed_bonus = build.get("speed", 0.0) * 3.0 + build.get("energy", 0.0) * 0.8
+    break_bonus = build.get("break", 0.0) * (4.0 if {"break", "super_break"} & tags else 1.7)
+    dot_bonus = build.get("dot", 0.0) * (3.8 if "dot" in tags else 1.2)
+    fua_bonus = build.get("fua", 0.0) * (3.6 if "fua" in tags else 1.1)
+    debuff_bonus = build.get("debuff", 0.0) * (3.2 if "nihility" in tags or traits.get("debuff", 0.0) >= 5 else 1.3)
+    support_bonus = build.get("support", 0.0) * (3.2 if "support" in roles else 1.0) + build.get("energy", 0.0) * (
+        1.8 if {"support", "sustain"} & roles else 0.7
+    )
+    survival_bonus = build.get("heal", 0.0) * (3.7 if "sustain" in roles else 1.2) + build.get("survival", 0.0) * (
+        2.0 if "sustain" in roles else 0.9
+    )
+    damage_bonus = build.get("damage", 0.0)
+    crit_bonus = build.get("crit", 0.0)
+
+    traits["speed"] += speed_bonus * detail
+    traits["break"] += break_bonus * detail
+    traits["dot"] += dot_bonus * detail
+    traits["fua"] += fua_bonus * detail
+    traits["debuff"] += debuff_bonus * detail
+    traits["support"] += support_bonus * detail
+    traits["survival"] += survival_bonus * detail
+
+    if "dot" in tags:
+        traits["aoe"] += (damage_bonus * 0.9 + build.get("dot", 0.0) * 1.2) * 2.2 * detail
+        traits["single"] += (damage_bonus * 0.7 + build.get("dot", 0.0) * 0.8) * 1.5 * detail
+    elif "fua" in tags:
+        traits["aoe"] += (crit_bonus * 1.0 + damage_bonus * 0.6) * 1.9 * detail
+        traits["single"] += (crit_bonus * 1.2 + damage_bonus * 0.9) * 1.8 * detail
+        traits["fua"] += crit_bonus * 1.1 * detail
+    elif {"break", "super_break"} & tags:
+        traits["single"] += (crit_bonus * 0.3 + damage_bonus * 0.7 + build.get("break", 0.0) * 1.1) * 2.0 * detail
+        traits["aoe"] += (damage_bonus * 0.5 + build.get("break", 0.0) * 0.8) * 1.6 * detail
+    else:
+        single_scale = 2.3 if "main_dps" in roles else 1.2
+        aoe_scale = 1.8 if "main_dps" in roles else 0.9
+        traits["single"] += (crit_bonus * 1.15 + damage_bonus) * single_scale * detail
+        traits["aoe"] += (crit_bonus * 0.8 + damage_bonus) * aoe_scale * detail
+
+    for key in traits:
+        traits[key] = round(traits[key], 2)
     return traits
 
 
@@ -288,6 +334,56 @@ def _score_label(score: float) -> str:
     return "勉强可打"
 
 
+def _pair_candidates(
+    top_candidates: list[dict[str, Any]],
+    bottom_candidates: list[dict[str, Any]],
+    roster_units: list[dict[str, Any]],
+    top_half: dict[str, Any],
+    bottom_half: dict[str, Any],
+    scenario: dict[str, Any],
+) -> tuple[list[dict[str, Any]], dict[str, Any]]:
+    id_to_bit = {unit["id"]: 1 << index for index, unit in enumerate(roster_units)}
+    exact_pair_limit = 1_200_000
+    approximate_pool = 40
+    exact_pairing = len(top_candidates) * len(bottom_candidates) <= exact_pair_limit
+
+    search_top = top_candidates if exact_pairing else top_candidates[:approximate_pool]
+    search_bottom = bottom_candidates if exact_pairing else bottom_candidates[:approximate_pool]
+    top_masks = [sum(id_to_bit[unit_id] for unit_id in team["characterIds"]) for team in search_top]
+    bottom_masks = [sum(id_to_bit[unit_id] for unit_id in team["characterIds"]) for team in search_bottom]
+
+    paired_results: list[dict[str, Any]] = []
+    for top_team, top_mask in zip(search_top, top_masks):
+        for bottom_team, bottom_mask in zip(search_bottom, bottom_masks):
+            if top_mask & bottom_mask:
+                continue
+            balance_bonus = round(max(0.0, 3.0 - abs(top_team["score"] - bottom_team["score"]) / 8.0), 2)
+            total_score = round(min(100.0, (top_team["score"] + bottom_team["score"]) / 2.0 + balance_bonus), 1)
+            paired_results.append(
+                {
+                    "score": total_score,
+                    "scoreLabel": _score_label(total_score),
+                    "teams": [
+                        {**top_team, "half": top_half["name"]},
+                        {**bottom_team, "half": bottom_half["name"]},
+                    ],
+                    "summary": _pair_summary(top_team, bottom_team, scenario),
+                }
+            )
+
+    paired_results.sort(key=lambda item: item["score"], reverse=True)
+    return (
+        paired_results,
+        {
+            "singleTeam": "穷举所有 4 人组合",
+            "pairing": "全量候选精确配对" if exact_pairing else f"Top {approximate_pool} x Top {approximate_pool} 的近似配对",
+            "pairingIsApproximate": not exact_pairing,
+            "pairedTopCandidates": len(search_top),
+            "pairedBottomCandidates": len(search_bottom),
+        },
+    )
+
+
 def _replacement_score(candidate: dict[str, Any], missing: dict[str, Any], half: dict[str, Any]) -> float:
     score = 0.0
     family_a = {ROLE_FAMILY.get(role, role) for role in candidate["base"]["roles"]}
@@ -376,6 +472,8 @@ def build_recommendation(scenario: dict[str, Any], roster_payload: Any) -> dict[
     mode = scenario["mode"]
     top_half, bottom_half = scenario["halves"]
     all_combos = list(combinations(roster_units, 4))
+    detailed_relic_units = sum(1 for unit in roster_units if unit.get("build", {}).get("hasDetailedRelics"))
+    parsed_relic_detail_units = sum(1 for unit in roster_units if unit.get("build", {}).get("detailLevel", 0.0) > 0.2)
 
     top_candidates: list[dict[str, Any]] = []
     bottom_candidates: list[dict[str, Any]] = []
@@ -392,31 +490,7 @@ def build_recommendation(scenario: dict[str, Any], roster_payload: Any) -> dict[
 
     top_candidates.sort(key=lambda item: item["score"], reverse=True)
     bottom_candidates.sort(key=lambda item: item["score"], reverse=True)
-
-    trimmed_top = top_candidates[:24]
-    trimmed_bottom = bottom_candidates[:24]
-    paired_results: list[dict[str, Any]] = []
-
-    for top_team in trimmed_top:
-        top_ids = set(top_team["characterIds"])
-        for bottom_team in trimmed_bottom:
-            bottom_ids = set(bottom_team["characterIds"])
-            if top_ids & bottom_ids:
-                continue
-            balance_bonus = round(max(0.0, 3.0 - abs(top_team["score"] - bottom_team["score"]) / 8.0), 2)
-            total_score = round(min(100.0, (top_team["score"] + bottom_team["score"]) / 2.0 + balance_bonus), 1)
-            paired_results.append(
-                {
-                    "score": total_score,
-                    "scoreLabel": _score_label(total_score),
-                    "teams": [
-                        {**top_team, "half": top_half["name"]},
-                        {**bottom_team, "half": bottom_half["name"]},
-                    ],
-                    "summary": _pair_summary(top_team, bottom_team, scenario),
-                }
-            )
-
+    paired_results, search_meta = _pair_candidates(top_candidates, bottom_candidates, roster_units, top_half, bottom_half, scenario)
     paired_results.sort(key=lambda item: item["score"], reverse=True)
     results = paired_results[:10]
 
@@ -453,6 +527,9 @@ def build_recommendation(scenario: dict[str, Any], roster_payload: Any) -> dict[
             "evaluatedTeams": len(all_combos),
             "topTeamCandidates": len(top_candidates),
             "bottomTeamCandidates": len(bottom_candidates),
+            "detailedRelicUnits": detailed_relic_units,
+            "parsedRelicDetailUnits": parsed_relic_detail_units,
+            "search": search_meta,
             "skipped": skipped,
         },
         "simulationMeta": simulation_meta,

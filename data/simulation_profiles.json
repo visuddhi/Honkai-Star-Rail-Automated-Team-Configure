@@ -1,0 +1,674 @@
+{
+  "moc_debuff_break": {
+    "top": {
+      "goal": "clear",
+      "buffs": {
+        "debuffBonus": 0.12,
+        "dotBonus": 0.08
+      },
+      "waves": [
+        {
+          "name": "上半召唤波",
+          "archetype": "elite_summon",
+          "targets": 3,
+          "hpPerTarget": 84,
+          "toughness": 26,
+          "speed": 108,
+          "pressure": 9.4,
+          "summonChance": 0.18,
+          "summonTargetsMax": 5,
+          "summonHp": 42,
+          "summonAttackPressure": 0.85,
+          "killScore": 90,
+          "dangerousSkill": {
+            "name": "撕裂集火",
+            "firstAt": 2,
+            "cycle": 3,
+            "chargeTurns": 1,
+            "chargePressureMultiplier": 0.6,
+            "pressureMultiplier": 1.55,
+            "flatPressure": 1.2,
+            "delayAllies": 10,
+            "summonTargets": 1,
+            "summonHp": 38,
+            "summonPressure": 0.75
+          },
+          "phaseTransitions": [
+            {
+              "name": "上半召唤波转入压制段，额外目标进场。",
+              "at": 0.66,
+              "pressureMultiplier": 1.08,
+              "speedBonus": 4,
+              "summonTargets": 1,
+              "summonHp": 40,
+              "summonPressure": 0.8,
+              "dangerSoon": true
+            },
+            {
+              "name": "上半召唤波残血狂暴，点名频率提升。",
+              "at": 0.32,
+              "pressureFlat": 1.8,
+              "speedBonus": 5,
+              "dangerousSkill": {
+                "name": "裂伤收束",
+                "firstAt": 1,
+                "cycle": 2,
+                "chargeTurns": 0,
+                "pressureMultiplier": 1.45,
+                "flatPressure": 1.8,
+                "delayAllies": 12
+              }
+            }
+          ]
+        },
+        {
+          "name": "上半双精英压轴",
+          "archetype": "elite",
+          "targets": 2,
+          "hpPerTarget": 148,
+          "toughness": 34,
+          "speed": 111,
+          "pressure": 11.6,
+          "killScore": 140,
+          "dangerousSkill": {
+            "name": "双精英点名",
+            "firstAt": 3,
+            "cycle": 3,
+            "chargeTurns": 1,
+            "chargePressureMultiplier": 0.62,
+            "pressureMultiplier": 1.68,
+            "flatPressure": 1.6,
+            "delayAllies": 14
+          },
+          "phaseTransitions": [
+            {
+              "name": "双精英进入连携阶段，行动轴明显加快。",
+              "at": 0.55,
+              "pressureMultiplier": 1.12,
+              "speedBonus": 6,
+              "dangerSoon": true
+            }
+          ]
+        }
+      ]
+    },
+    "bottom": {
+      "goal": "clear",
+      "buffs": {
+        "breakBonus": 0.18,
+        "singleBonus": 0.08
+      },
+      "waves": [
+        {
+          "name": "下半高韧 Boss 第一阶段",
+          "archetype": "boss",
+          "targets": 1,
+          "hpPerTarget": 355,
+          "toughness": 58,
+          "speed": 102,
+          "pressure": 15.2,
+          "berserkAt": 0.42,
+          "summonTargetsMax": 3,
+          "summonHp": 74,
+          "summonAttackPressure": 1.2,
+          "killScore": 180,
+          "dangerousSkill": {
+            "name": "重踏预兆",
+            "firstAt": 2,
+            "cycle": 3,
+            "chargeTurns": 1,
+            "chargePressureMultiplier": 0.58,
+            "pressureMultiplier": 1.78,
+            "flatPressure": 2.2,
+            "delayAllies": 18
+          },
+          "phaseTransitions": [
+            {
+              "name": "Boss 抬手召出辅怪并重置韧性窗口。",
+              "at": 0.7,
+              "speedBonus": 4,
+              "toughnessRefill": 0.55,
+              "summonTargets": 2,
+              "summonHp": 72,
+              "summonPressure": 1.05,
+              "dangerSoon": true
+            },
+            {
+              "name": "Boss 进入压血阶段，危险技能提前。",
+              "at": 0.36,
+              "pressureMultiplier": 1.16,
+              "pressureFlat": 2.0,
+              "dangerousSkill": {
+                "name": "重踏终结",
+                "firstAt": 1,
+                "cycle": 2,
+                "chargeTurns": 1,
+                "chargePressureMultiplier": 0.6,
+                "pressureMultiplier": 1.92,
+                "flatPressure": 2.8,
+                "delayAllies": 22
+              }
+            }
+          ]
+        },
+        {
+          "name": "下半高韧 Boss 第二阶段",
+          "archetype": "boss",
+          "targets": 1,
+          "hpPerTarget": 390,
+          "toughness": 62,
+          "speed": 107,
+          "pressure": 16.9,
+          "breakWindowBonus": 0.16,
+          "berserkAt": 0.34,
+          "summonTargetsMax": 3,
+          "summonHp": 80,
+          "summonAttackPressure": 1.3,
+          "killScore": 220,
+          "dangerousSkill": {
+            "name": "高压歼灭炮",
+            "firstAt": 2,
+            "cycle": 3,
+            "chargeTurns": 1,
+            "chargePressureMultiplier": 0.56,
+            "pressureMultiplier": 1.95,
+            "flatPressure": 3.0,
+            "ignoreGuard": true,
+            "delayAllies": 24
+          },
+          "phaseTransitions": [
+            {
+              "name": "Boss 第二阶段转入最终狂暴，护盾与位移都更难兜住。",
+              "at": 0.45,
+              "pressureMultiplier": 1.12,
+              "speedBonus": 6,
+              "summonTargets": 1,
+              "summonHp": 78,
+              "summonPressure": 1.2,
+              "dangerSoon": true
+            }
+          ]
+        }
+      ]
+    }
+  },
+  "moc_followup_split": {
+    "top": {
+      "goal": "clear",
+      "buffs": {
+        "aoeBonus": 0.08,
+        "fuaBonus": 0.16
+      },
+      "waves": [
+        {
+          "name": "上半追击首波",
+          "archetype": "elite_summon",
+          "targets": 3,
+          "hpPerTarget": 92,
+          "toughness": 26,
+          "speed": 107,
+          "pressure": 9.6,
+          "summonChance": 0.14,
+          "summonTargetsMax": 5,
+          "summonHp": 46,
+          "summonAttackPressure": 0.75,
+          "killScore": 100,
+          "dangerousSkill": {
+            "name": "群体锁定",
+            "firstAt": 2,
+            "cycle": 3,
+            "chargeTurns": 0,
+            "pressureMultiplier": 1.38,
+            "flatPressure": 1.0,
+            "delayAllies": 8
+          },
+          "phaseTransitions": [
+            {
+              "name": "追击首波场面扩张，额外目标提高追击价值。",
+              "at": 0.58,
+              "summonTargets": 1,
+              "summonHp": 44,
+              "summonPressure": 0.7,
+              "speedBonus": 4
+            }
+          ]
+        },
+        {
+          "name": "上半双精英收尾",
+          "archetype": "elite",
+          "targets": 2,
+          "hpPerTarget": 160,
+          "toughness": 30,
+          "speed": 110,
+          "pressure": 11.1,
+          "killScore": 150,
+          "dangerousSkill": {
+            "name": "锁定爆破",
+            "firstAt": 3,
+            "cycle": 3,
+            "chargeTurns": 1,
+            "chargePressureMultiplier": 0.64,
+            "pressureMultiplier": 1.62,
+            "flatPressure": 1.4,
+            "delayAllies": 12
+          },
+          "phaseTransitions": [
+            {
+              "name": "双精英后半段会连续压轴，留技能更重要。",
+              "at": 0.4,
+              "pressureMultiplier": 1.1,
+              "speedBonus": 5,
+              "dangerSoon": true
+            }
+          ]
+        }
+      ]
+    },
+    "bottom": {
+      "goal": "clear",
+      "buffs": {
+        "singleBonus": 0.14,
+        "debuffBonus": 0.12
+      },
+      "waves": [
+        {
+          "name": "下半单核 Boss 第一阶段",
+          "archetype": "boss",
+          "targets": 1,
+          "hpPerTarget": 368,
+          "toughness": 48,
+          "speed": 104,
+          "pressure": 14.5,
+          "berserkAt": 0.45,
+          "summonTargetsMax": 3,
+          "summonHp": 70,
+          "summonAttackPressure": 1.0,
+          "killScore": 180,
+          "dangerousSkill": {
+            "name": "裁决锁定",
+            "firstAt": 2,
+            "cycle": 3,
+            "chargeTurns": 1,
+            "chargePressureMultiplier": 0.6,
+            "pressureMultiplier": 1.74,
+            "flatPressure": 2.0,
+            "delayAllies": 18
+          },
+          "phaseTransitions": [
+            {
+              "name": "Boss 第一阶段转为召唤协同，场面目标增加。",
+              "at": 0.62,
+              "summonTargets": 2,
+              "summonHp": 66,
+              "summonPressure": 0.95,
+              "speedBonus": 4,
+              "dangerSoon": true
+            }
+          ]
+        },
+        {
+          "name": "下半单核 Boss 第二阶段",
+          "archetype": "boss",
+          "targets": 1,
+          "hpPerTarget": 402,
+          "toughness": 52,
+          "speed": 108,
+          "pressure": 15.9,
+          "summonTargetsMax": 2,
+          "summonHp": 76,
+          "summonAttackPressure": 1.15,
+          "killScore": 220,
+          "dangerousSkill": {
+            "name": "终局判决",
+            "firstAt": 2,
+            "cycle": 2,
+            "chargeTurns": 1,
+            "chargePressureMultiplier": 0.58,
+            "pressureMultiplier": 1.88,
+            "flatPressure": 2.6,
+            "ignoreGuard": true,
+            "delayAllies": 20
+          },
+          "phaseTransitions": [
+            {
+              "name": "Boss 第二阶段低血会压缩你的操作窗口。",
+              "at": 0.38,
+              "pressureMultiplier": 1.12,
+              "speedBonus": 6,
+              "dangerSoon": true
+            }
+          ]
+        }
+      ]
+    }
+  },
+  "pure_fiction_aoe": {
+    "top": {
+      "goal": "points",
+      "scoreTarget": 7200,
+      "buffs": {
+        "aoeBonus": 0.18,
+        "fuaBonus": 0.18
+      },
+      "waves": [
+        {
+          "name": "上半刷分波 A",
+          "archetype": "pack",
+          "targets": 5,
+          "hpPerTarget": 44,
+          "toughness": 13,
+          "speed": 104,
+          "pressure": 4.5,
+          "respawns": 2,
+          "respawnScale": 1.08,
+          "killScore": 230,
+          "summonChance": 0.12,
+          "summonTargetsMax": 6,
+          "summonHp": 28,
+          "summonAttackPressure": 0.35,
+          "dangerousSkill": {
+            "name": "杂兵齐射",
+            "firstAt": 3,
+            "cycle": 4,
+            "chargeTurns": 0,
+            "pressureMultiplier": 1.18,
+            "flatPressure": 0.8
+          },
+          "phaseTransitions": [
+            {
+              "name": "刷分波 A 中段开始连续补怪，AOE 队收益变高。",
+              "at": 0.52,
+              "summonTargets": 1,
+              "summonHp": 26,
+              "summonPressure": 0.3,
+              "speedBonus": 3
+            }
+          ]
+        },
+        {
+          "name": "上半刷分波 B",
+          "archetype": "pack",
+          "targets": 4,
+          "hpPerTarget": 58,
+          "toughness": 17,
+          "speed": 108,
+          "pressure": 5.3,
+          "respawns": 2,
+          "respawnScale": 1.1,
+          "summonChance": 0.18,
+          "summonTargetsMax": 6,
+          "summonHp": 34,
+          "summonAttackPressure": 0.42,
+          "killScore": 280,
+          "dangerousSkill": {
+            "name": "集中轰炸",
+            "firstAt": 3,
+            "cycle": 4,
+            "chargeTurns": 0,
+            "pressureMultiplier": 1.24,
+            "flatPressure": 1.1,
+            "delayAllies": 6
+          },
+          "phaseTransitions": [
+            {
+              "name": "刷分波 B 开始连刷小怪，连锁追击价值上升。",
+              "at": 0.55,
+              "summonTargets": 2,
+              "summonHp": 30,
+              "summonPressure": 0.35
+            }
+          ]
+        }
+      ]
+    },
+    "bottom": {
+      "goal": "points",
+      "scoreTarget": 7200,
+      "buffs": {
+        "aoeBonus": 0.12,
+        "dotBonus": 0.18,
+        "debuffBonus": 0.08
+      },
+      "waves": [
+        {
+          "name": "下半 DoT 刷分波 A",
+          "archetype": "pack",
+          "targets": 5,
+          "hpPerTarget": 46,
+          "toughness": 14,
+          "speed": 105,
+          "pressure": 4.6,
+          "respawns": 2,
+          "respawnScale": 1.08,
+          "killScore": 230,
+          "dangerousSkill": {
+            "name": "腐蚀喷发",
+            "firstAt": 3,
+            "cycle": 4,
+            "chargeTurns": 0,
+            "pressureMultiplier": 1.2,
+            "flatPressure": 0.9
+          },
+          "phaseTransitions": [
+            {
+              "name": "DoT 刷分波 A 中段补怪，持续伤害开始更容易滚起来。",
+              "at": 0.54,
+              "summonTargets": 1,
+              "summonHp": 28,
+              "summonPressure": 0.3
+            }
+          ]
+        },
+        {
+          "name": "下半 DoT 刷分波 B",
+          "archetype": "pack",
+          "targets": 4,
+          "hpPerTarget": 56,
+          "toughness": 16,
+          "speed": 109,
+          "pressure": 5.1,
+          "respawns": 2,
+          "respawnScale": 1.1,
+          "summonChance": 0.16,
+          "summonTargetsMax": 6,
+          "summonHp": 30,
+          "summonAttackPressure": 0.38,
+          "killScore": 270,
+          "dangerousSkill": {
+            "name": "密集压制",
+            "firstAt": 3,
+            "cycle": 4,
+            "chargeTurns": 0,
+            "pressureMultiplier": 1.22,
+            "flatPressure": 1.0,
+            "delayAllies": 6
+          },
+          "phaseTransitions": [
+            {
+              "name": "DoT 刷分波 B 会持续补怪，要求队伍稳定续上挂点。",
+              "at": 0.5,
+              "summonTargets": 2,
+              "summonHp": 28,
+              "summonPressure": 0.32
+            }
+          ]
+        }
+      ]
+    }
+  },
+  "apocalyptic_shadow_break": {
+    "top": {
+      "goal": "clear",
+      "buffs": {
+        "singleBonus": 0.1,
+        "breakBonus": 0.18
+      },
+      "waves": [
+        {
+          "name": "上半 Boss 第一阶段",
+          "archetype": "boss",
+          "targets": 1,
+          "hpPerTarget": 362,
+          "toughness": 60,
+          "speed": 103,
+          "pressure": 15.4,
+          "berserkAt": 0.5,
+          "summonTargetsMax": 3,
+          "summonHp": 78,
+          "summonAttackPressure": 1.2,
+          "killScore": 190,
+          "dangerousSkill": {
+            "name": "蚀刻终焉",
+            "firstAt": 2,
+            "cycle": 3,
+            "chargeTurns": 1,
+            "chargePressureMultiplier": 0.56,
+            "pressureMultiplier": 1.86,
+            "flatPressure": 2.4,
+            "ignoreGuard": true,
+            "delayAllies": 20
+          },
+          "phaseTransitions": [
+            {
+              "name": "Boss 第一阶段进入破韧检定，召唤物会分散火力。",
+              "at": 0.68,
+              "toughnessRefill": 0.6,
+              "summonTargets": 2,
+              "summonHp": 74,
+              "summonPressure": 1.0,
+              "dangerSoon": true
+            },
+            {
+              "name": "Boss 第一阶段低血时进一步加速，插队价值变高。",
+              "at": 0.35,
+              "pressureMultiplier": 1.14,
+              "speedBonus": 6,
+              "dangerousSkill": {
+                "name": "蚀刻坠击",
+                "firstAt": 1,
+                "cycle": 2,
+                "chargeTurns": 1,
+                "chargePressureMultiplier": 0.58,
+                "pressureMultiplier": 1.94,
+                "flatPressure": 2.8,
+                "ignoreGuard": true,
+                "delayAllies": 22
+              }
+            }
+          ]
+        },
+        {
+          "name": "上半 Boss 第二阶段",
+          "archetype": "boss",
+          "targets": 1,
+          "hpPerTarget": 408,
+          "toughness": 64,
+          "speed": 108,
+          "pressure": 17.1,
+          "breakWindowBonus": 0.18,
+          "berserkAt": 0.3,
+          "summonTargetsMax": 3,
+          "summonHp": 82,
+          "summonAttackPressure": 1.25,
+          "killScore": 230,
+          "dangerousSkill": {
+            "name": "影蚀终局",
+            "firstAt": 2,
+            "cycle": 3,
+            "chargeTurns": 1,
+            "chargePressureMultiplier": 0.54,
+            "pressureMultiplier": 2.0,
+            "flatPressure": 3.0,
+            "ignoreGuard": true,
+            "delayAllies": 24
+          },
+          "phaseTransitions": [
+            {
+              "name": "Boss 第二阶段中段会再抬一次轴，击破队更需要把握终结技插队。",
+              "at": 0.44,
+              "speedBonus": 6,
+              "pressureMultiplier": 1.1,
+              "dangerSoon": true
+            }
+          ]
+        }
+      ]
+    },
+    "bottom": {
+      "goal": "clear",
+      "buffs": {
+        "singleBonus": 0.1,
+        "debuffBonus": 0.16
+      },
+      "waves": [
+        {
+          "name": "下半 Boss 第一阶段",
+          "archetype": "boss",
+          "targets": 1,
+          "hpPerTarget": 348,
+          "toughness": 50,
+          "speed": 104,
+          "pressure": 14.7,
+          "berserkAt": 0.45,
+          "summonTargetsMax": 3,
+          "summonHp": 72,
+          "summonAttackPressure": 1.0,
+          "killScore": 185,
+          "dangerousSkill": {
+            "name": "虚影斩落",
+            "firstAt": 2,
+            "cycle": 3,
+            "chargeTurns": 1,
+            "chargePressureMultiplier": 0.6,
+            "pressureMultiplier": 1.72,
+            "flatPressure": 2.0,
+            "delayAllies": 18
+          },
+          "phaseTransitions": [
+            {
+              "name": "Boss 第一阶段开始召唤镜像，转火与击破节奏更难兼顾。",
+              "at": 0.64,
+              "summonTargets": 2,
+              "summonHp": 68,
+              "summonPressure": 0.95,
+              "dangerSoon": true
+            }
+          ]
+        },
+        {
+          "name": "下半 Boss 第二阶段",
+          "archetype": "boss",
+          "targets": 1,
+          "hpPerTarget": 396,
+          "toughness": 54,
+          "speed": 109,
+          "pressure": 16.2,
+          "summonTargetsMax": 2,
+          "summonHp": 78,
+          "summonAttackPressure": 1.15,
+          "killScore": 225,
+          "dangerousSkill": {
+            "name": "蚀灭坠星",
+            "firstAt": 2,
+            "cycle": 2,
+            "chargeTurns": 1,
+            "chargePressureMultiplier": 0.56,
+            "pressureMultiplier": 1.9,
+            "flatPressure": 2.7,
+            "ignoreGuard": true,
+            "delayAllies": 22
+          },
+          "phaseTransitions": [
+            {
+              "name": "Boss 第二阶段低血连发危险技能，队伍容错会明显收紧。",
+              "at": 0.4,
+              "pressureMultiplier": 1.12,
+              "speedBonus": 6,
+              "dangerSoon": true
+            }
+          ]
+        }
+      ]
+    }
+  }
+}

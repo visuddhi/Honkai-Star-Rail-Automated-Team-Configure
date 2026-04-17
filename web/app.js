@@ -92,6 +92,10 @@ function renderMeta(meta, simulationMeta = null) {
     ["下半候选", `${meta.bottomTeamCandidates}`],
   ];
 
+  if ((meta.parsedRelicDetailUnits || 0) > 0) {
+    items.push(["遗器细节", `${meta.parsedRelicDetailUnits}`]);
+  }
+
   if (simulationMeta?.simulatedResults) {
     items.push(["回合模拟", `Top ${simulationMeta.simulatedResults}`]);
     items.push(["单队抽样", `${simulationMeta.runsPerResult} 次`]);
@@ -133,6 +137,8 @@ function renderSimulation(simulation) {
     ["双清率", formatPercent(overview.pairClearRate)],
     ["均分", `${overview.averagePairScore ?? "-"}`],
     ["波动区间", `${overview.minPairScore ?? "-"} - ${overview.maxPairScore ?? "-"}`],
+    ["平均插队", `${overview.averageInterrupts ?? "-"}`],
+    ["平均险招", `${overview.averageDangerousSkills ?? "-"}`],
   ];
 
   const profiles = (simulation.profiles || [])
@@ -166,6 +172,10 @@ function renderSimulation(simulation) {
                       <span>轮次 ${half.cycleEquivalent}</span>
                       <span>敌动 ${half.enemyTurns}</span>
                       <span>破韧 ${half.breaks}</span>
+                      <span>插队 ${half.interruptsUsed ?? 0}</span>
+                      <span>险招 ${half.dangerousSkillsSeen ?? 0}</span>
+                      <span>转阶段 ${half.phaseTransitions ?? 0}</span>
+                      ${half.specialMetric ? `<span>${half.specialMetric.label} ${half.specialMetric.value}</span>` : ""}
                     </div>
                     <ul>
                       ${(half.keyMoments || []).map((item) => `<li>${item}</li>`).join("")}
@@ -187,7 +197,7 @@ function renderSimulation(simulation) {
       <header class="simulation-header">
         <div>
           <h4>回合模拟原型</h4>
-          <p>当前版本会对 Top 结果抽样 ${simulation.runs} 次，并同时展示普通 / 最差 / 最佳随机视角。</p>
+          <p>当前版本会对 Top 结果抽样 ${simulation.runs} 次，并模拟终结技插队、危险技能、召唤物与阶段转换。</p>
         </div>
         <div class="simulation-overview">
           ${overviewItems

@@ -99,6 +99,10 @@ POST /api/recommend
 - `weaponScore`
 - `coneScore`
 - `lightCone`
+- `relics`
+- `artifacts`
+- `equipment`
+- `ornaments`
 
 数值归一化规则：
 
@@ -112,6 +116,28 @@ POST /api/recommend
 - `owned: false` 的记录会被忽略
 - 同一角色重复出现时，只会保留一份
 - 识别失败的角色会出现在返回结果的 `meta.skipped`
+- 如果提供详细遗器结构，当前版本会额外解析主词条 / 副词条 / 套装，并映射到速度、击破、追击、DoT、减益、辅助、生存等派生属性
+
+遗器详细结构推荐长这样：
+
+```json
+{
+  "id": "firefly",
+  "relics": [
+    {
+      "setName": "Iron Cavalry",
+      "mainStat": "Break Effect",
+      "mainValue": "64.8%",
+      "substats": [
+        { "type": "Speed", "value": "9" },
+        { "type": "Break Effect", "value": "24%" }
+      ],
+      "level": 15,
+      "rarity": 5
+    }
+  ]
+}
+```
 
 ## 7. 最低测试要求
 
