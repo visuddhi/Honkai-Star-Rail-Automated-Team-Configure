@@ -266,5 +266,181 @@
         ]
       }
     ]
+  },
+  {
+    "id": "arbiter_knight_1_pamu_2026_03",
+    "mode": "anomaly_arbitration",
+    "modeLabel": "异相仲裁",
+    "name": "异相仲裁 4.1：骑士（一）",
+    "cycle": "2026-03-25 别惹帕姆",
+    "description": "当前轮次的骑士（一）更像火 / 物理优势的机制关，既要拆减伤，也要尽量通过击破或高频出手压住锁弱点和蓄力目标。",
+    "buffs": [
+      "来源参考 2026-03-25 至 2026-03-26 的 4.1『别惹帕姆』攻略整理。",
+      "开局存在伤害降低层数，施放终结技可更快拆层。",
+      "场上敌人会锁弱点、蓄力和高额减伤，节奏慢的队伍会明显吃亏。"
+    ],
+    "halves": [
+      {
+        "key": "single",
+        "name": "骑士（一）",
+        "enemySummary": "火 / 物理优势，量子会吃特殊对策；有锁弱点、蓄力和高额减伤目标",
+        "preferredElements": ["火", "物理"],
+        "weights": {
+          "break": 16,
+          "speed": 14,
+          "single": 10,
+          "aoe": 8,
+          "survival": 8,
+          "support": 8,
+          "dot": 6
+        },
+        "targets": {
+          "break": 16,
+          "speed": 14,
+          "single": 14,
+          "aoe": 12,
+          "survival": 10,
+          "support": 12,
+          "dot": 10
+        },
+        "requireSustain": true,
+        "notes": [
+          "优先考虑能高频拆机制的击破队、火伤队或稳定对策队。",
+          "如果既不能快速削韧，也不能频繁交终结技，关卡会很拖。"
+        ]
+      }
+    ]
+  },
+  {
+    "id": "arbiter_knight_2_pamu_2026_03",
+    "mode": "anomaly_arbitration",
+    "modeLabel": "异相仲裁",
+    "name": "异相仲裁 4.1：骑士（二）",
+    "cycle": "2026-03-25 别惹帕姆",
+    "description": "骑士（二）更接近量子 / 雷优势的高压单关，前半有召唤与单挑，后半 Boss 会把全队压到 1 血，治疗和节奏都很关键。",
+    "buffs": [
+      "来源参考 2026-03-25 至 2026-03-26 的 4.1『别惹帕姆』攻略整理。",
+      "开局降低能量，前两回合回合外回能也会被压制。",
+      "敌方在受击达到一定次数后会立即行动，治疗和稳定节奏会更值钱。"
+    ],
+    "halves": [
+      {
+        "key": "single",
+        "name": "骑士（二）",
+        "enemySummary": "量子 / 雷 / 物理优势；有召唤者、单挑机制与把全队压到 1 血的 Boss",
+        "preferredElements": ["量子", "雷", "物理"],
+        "weights": {
+          "single": 14,
+          "speed": 12,
+          "survival": 14,
+          "support": 10,
+          "break": 8,
+          "aoe": 6,
+          "dot": 8
+        },
+        "targets": {
+          "single": 16,
+          "speed": 12,
+          "survival": 12,
+          "support": 12,
+          "break": 10,
+          "aoe": 10,
+          "dot": 10
+        },
+        "requireSustain": true,
+        "notes": [
+          "带治疗的稳定单核、DoT 或击破队都会比纯爆发玻璃炮更舒服。",
+          "如果续航和拉条不足，很容易在死龙机制点直接断节奏。"
+        ]
+      }
+    ]
+  },
+  {
+    "id": "arbiter_knight_3_pamu_2026_03",
+    "mode": "anomaly_arbitration",
+    "modeLabel": "异相仲裁",
+    "name": "异相仲裁 4.1：骑士（三）",
+    "cycle": "2026-03-25 别惹帕姆",
+    "description": "骑士（三）是高血量的物理 / 雷优势关，后半核心在 Boss 变身和召小怪机制，既需要稳定单体，也不能完全放掉清杂。",
+    "buffs": [
+      "来源参考 2026-03-25 至 2026-03-26 的 4.1『别惹帕姆』攻略整理。",
+      "每次受击都会随机退条，出手被打乱的队伍会明显掉效率。",
+      "第二波 Boss 会切形态并要求处理召唤物或等待特定机制窗口。"
+    ],
+    "halves": [
+      {
+        "key": "single",
+        "name": "骑士（三）",
+        "enemySummary": "物理 / 雷优势，高血量 Boss 会切形态并召唤小怪",
+        "preferredElements": ["物理", "雷"],
+        "weights": {
+          "single": 14,
+          "aoe": 10,
+          "speed": 12,
+          "survival": 10,
+          "support": 8,
+          "break": 6
+        },
+        "targets": {
+          "single": 16,
+          "aoe": 12,
+          "speed": 12,
+          "survival": 10,
+          "support": 12,
+          "break": 10
+        },
+        "requireSustain": true,
+        "notes": [
+          "高质量单核是底座，但完全没有对群处理会在黑潮形态明显卡手。",
+          "终结技时机和形态转换窗口处理得越好，这关越容易压轮次。"
+        ]
+      }
+    ]
+  },
+  {
+    "id": "arbiter_king_pamu_2026_03",
+    "mode": "anomaly_arbitration",
+    "modeLabel": "异相仲裁",
+    "name": "异相仲裁 4.1：将杀王棋（帕姆王）",
+    "cycle": "2026-03-25 别惹帕姆",
+    "description": "这期王棋是机械帕姆领衔的帕姆王关卡，前半要处理民用机铠与欢愉机制，后半则要靠笑点和合金帕姆拆 Boss 减伤层。",
+    "buffs": [
+      "来源参考 2026-03-25 至 2026-03-26 的 4.1『别惹帕姆』攻略整理。",
+      "本关同时叠加了减伤层、受击退条和最大生命值削减等多种负面效果。",
+      "Boss 会反复给自己上减伤，并召唤合金帕姆要求你过笑点机制。"
+    ],
+    "halves": [
+      {
+        "key": "single",
+        "name": "将杀王棋（帕姆王）",
+        "enemySummary": "火 / 雷优势；前半有民用机铠与欢愉对策，后半帕姆王会召合金帕姆并反复叠减伤",
+        "preferredElements": ["火", "雷"],
+        "weights": {
+          "single": 12,
+          "aoe": 10,
+          "speed": 12,
+          "survival": 10,
+          "support": 8,
+          "break": 8,
+          "fua": 6,
+          "dot": 6
+        },
+        "targets": {
+          "single": 16,
+          "aoe": 12,
+          "speed": 12,
+          "survival": 10,
+          "support": 12,
+          "break": 12,
+          "fua": 10,
+          "dot": 10
+        },
+        "requireSustain": true,
+        "notes": [
+          "如果不是欢愉队，就更需要稳定处理召唤物、拆减伤和保住行动轴。",
+          "这关不只是看纯输出，能不能把笑点与阶段机制顺过去同样重要。"
+        ]
+      }
+    ]
   }
 ]

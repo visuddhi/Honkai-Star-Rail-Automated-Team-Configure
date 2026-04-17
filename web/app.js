@@ -88,9 +88,16 @@ function renderMeta(meta, simulationMeta = null) {
   const items = [
     ["识别角色", `${meta.rosterSize}`],
     ["枚举队伍", `${meta.evaluatedTeams}`],
-    ["上半候选", `${meta.topTeamCandidates}`],
-    ["下半候选", `${meta.bottomTeamCandidates}`],
   ];
+
+  if ((meta.stageCandidateCounts || []).length) {
+    meta.stageCandidateCounts.forEach((entry) => {
+      items.push([`${entry.label}候选`, `${entry.count}`]);
+    });
+  } else {
+    items.push(["上半候选", `${meta.topTeamCandidates}`]);
+    items.push(["下半候选", `${meta.bottomTeamCandidates}`]);
+  }
 
   if ((meta.parsedRelicDetailUnits || 0) > 0) {
     items.push(["遗器细节", `${meta.parsedRelicDetailUnits}`]);
@@ -299,7 +306,10 @@ async function submitRecommendation() {
     return;
   }
 
-  setStatus("正在枚举双队并计算评分，请稍等。", "loading");
+  const scenario = state.scenarios.find((item) => item.id === state.scenarioId);
+  const stageCount = scenario?.halves?.length || 0;
+  const loadingLabel = stageCount <= 1 ? "单队" : "双队";
+  setStatus(`正在枚举${loadingLabel}并计算评分，请稍等。`, "loading");
   resultsEl.innerHTML = "";
   metaStrip.innerHTML = "";
 

@@ -324,6 +324,13 @@ def _pair_summary(top_team: dict[str, Any], bottom_team: dict[str, Any], scenari
     return f"{mode_label}里这套双队把上半环境需求与下半 Boss 压力拆开处理，角色资源没有互相挤占。"
 
 
+def _single_summary(team: dict[str, Any], half: dict[str, Any], scenario: dict[str, Any]) -> str:
+    mode_label = scenario["modeLabel"]
+    if scenario["mode"] == "anomaly_arbitration":
+        return f"{mode_label}里这套单队优先匹配 {half['name']} 的机制需求，尽量把当前关卡最卡手的目标、阶段或减伤机制处理掉。"
+    return f"{mode_label}里这套单队会优先覆盖 {half['name']} 的主要压力点。"
+
+
 def _score_label(score: float) -> str:
     if score >= 90:
         return "稳满星候选"
@@ -380,6 +387,30 @@ def _pair_candidates(
             "pairingIsApproximate": not exact_pairing,
             "pairedTopCandidates": len(search_top),
             "pairedBottomCandidates": len(search_bottom),
+        },
+    )
+
+
+def _single_stage_results(
+    candidates: list[dict[str, Any]],
+    half: dict[str, Any],
+    scenario: dict[str, Any],
+) -> tuple[list[dict[str, Any]], dict[str, Any]]:
+    results = [
+        {
+            "score": team["score"],
+            "scoreLabel": _score_label(team["score"]),
+            "teams": [{**team, "half": half["name"]}],
+            "summary": _single_summary(team, half, scenario),
+        }
+        for team in candidates[:10]
+    ]
+    return (
+        results,
+        {
+            "singleTeam": "穷举所有 4 人组合",
+            "pairing": "单关推荐，无需跨队配对",
+            "pairingIsApproximate": False,
         },
     )
 
@@ -465,53 +496,94 @@ def build_recommendation(scenario: dict[str, Any], roster_payload: Any) -> dict[
     except ValueError as exc:
         raise RecommendationError(str(exc)) from exc
 
-    if len(roster_units) < 8:
-        raise RecommendationError("当前盒子可识别角色少于 8 名，无法组成有效双队。")
-
     roster_units = _attach_runtime_fields(roster_units)
     mode = scenario["mode"]
-    top_half, bottom_half = scenario["halves"]
+    halves = scenario["halves"]
+    required_teams = len(halves)
+    required_units = required_teams * 4
+    if len(roster_units) < required_units:
+        if required_teams <= 1:
+            raise RecommendationError("当前盒子可识别角色少于 4 名，无法组成有效单队。")
+        raise RecommendationError(f"当前盒子可识别角色少于 {required_units} 名，无法组成有效多队。")
+
     all_combos = list(combinations(roster_units, 4))
     detailed_relic_units = sum(1 for unit in roster_units if unit.get("build", {}).get("hasDetailedRelics"))
     parsed_relic_detail_units = sum(1 for unit in roster_units if unit.get("build", {}).get("detailLevel", 0.0) > 0.2)
 
-    top_candidates: list[dict[str, Any]] = []
-    bottom_candidates: list[dict[str, Any]] = []
-
-    for combo in all_combos:
-        team = list(combo)
-        if _is_team_valid(team, top_half, mode):
-            top_candidates.append(_score_team(team, top_half, mode))
-        if _is_team_valid(team, bottom_half, mode):
-            bottom_candidates.append(_score_team(team, bottom_half, mode))
-
-    if not top_candidates or not bottom_candidates:
-        raise RecommendationError("没有找到满足约束的队伍，请补充角色或放宽输入盒子。")
-
-    top_candidates.sort(key=lambda item: item["score"], reverse=True)
-    bottom_candidates.sort(key=lambda item: item["score"], reverse=True)
-    paired_results, search_meta = _pair_candidates(top_candidates, bottom_candidates, roster_units, top_half, bottom_half, scenario)
-    paired_results.sort(key=lambda item: item["score"], reverse=True)
-    results = paired_results[:10]
-
     roster_by_id = {unit["id"]: unit for unit in roster_units}
-    for result in results:
-        top_ids = set(result["teams"][0]["characterIds"])
-        bottom_ids = set(result["teams"][1]["characterIds"])
-        top_team_units = [roster_by_id[unit_id] for unit_id in result["teams"][0]["characterIds"]]
-        bottom_team_units = [roster_by_id[unit_id] for unit_id in result["teams"][1]["characterIds"]]
-        result["alternatives"] = [
-            {
-                "half": top_half["name"],
-                "suggestions": _build_substitutions(top_team_units, bottom_ids, roster_units, top_half, mode),
-            },
-            {
-                "half": bottom_half["name"],
-                "suggestions": _build_substitutions(bottom_team_units, top_ids, roster_units, bottom_half, mode),
-            },
-        ]
+    stage_candidate_counts: list[dict[str, Any]] = []
 
-    simulation_meta = attach_simulations(scenario, results, roster_by_id)
+    if required_teams == 1:
+        half = halves[0]
+        candidates: list[dict[str, Any]] = []
+        for combo in all_combos:
+            team = list(combo)
+            if _is_team_valid(team, half, mode):
+                candidates.append(_score_team(team, half, mode))
+
+        if not candidates:
+            raise RecommendationError("没有找到满足约束的队伍，请补充角色或放宽输入盒子。")
+
+        candidates.sort(key=lambda item: item["score"], reverse=True)
+        results, search_meta = _single_stage_results(candidates, half, scenario)
+        stage_candidate_counts.append({"label": half["name"], "count": len(candidates)})
+
+        for result in results:
+            selected_units = [roster_by_id[unit_id] for unit_id in result["teams"][0]["characterIds"]]
+            result["alternatives"] = [
+                {
+                    "half": half["name"],
+                    "suggestions": _build_substitutions(selected_units, set(), roster_units, half, mode),
+                }
+            ]
+
+        simulation_meta: dict[str, Any] = {}
+    elif required_teams == 2:
+        top_half, bottom_half = halves
+        top_candidates: list[dict[str, Any]] = []
+        bottom_candidates: list[dict[str, Any]] = []
+
+        for combo in all_combos:
+            team = list(combo)
+            if _is_team_valid(team, top_half, mode):
+                top_candidates.append(_score_team(team, top_half, mode))
+            if _is_team_valid(team, bottom_half, mode):
+                bottom_candidates.append(_score_team(team, bottom_half, mode))
+
+        if not top_candidates or not bottom_candidates:
+            raise RecommendationError("没有找到满足约束的队伍，请补充角色或放宽输入盒子。")
+
+        top_candidates.sort(key=lambda item: item["score"], reverse=True)
+        bottom_candidates.sort(key=lambda item: item["score"], reverse=True)
+        paired_results, search_meta = _pair_candidates(top_candidates, bottom_candidates, roster_units, top_half, bottom_half, scenario)
+        paired_results.sort(key=lambda item: item["score"], reverse=True)
+        results = paired_results[:10]
+        stage_candidate_counts.extend(
+            [
+                {"label": top_half["name"], "count": len(top_candidates)},
+                {"label": bottom_half["name"], "count": len(bottom_candidates)},
+            ]
+        )
+
+        for result in results:
+            top_ids = set(result["teams"][0]["characterIds"])
+            bottom_ids = set(result["teams"][1]["characterIds"])
+            top_team_units = [roster_by_id[unit_id] for unit_id in result["teams"][0]["characterIds"]]
+            bottom_team_units = [roster_by_id[unit_id] for unit_id in result["teams"][1]["characterIds"]]
+            result["alternatives"] = [
+                {
+                    "half": top_half["name"],
+                    "suggestions": _build_substitutions(top_team_units, bottom_ids, roster_units, top_half, mode),
+                },
+                {
+                    "half": bottom_half["name"],
+                    "suggestions": _build_substitutions(bottom_team_units, top_ids, roster_units, bottom_half, mode),
+                },
+            ]
+
+        simulation_meta = attach_simulations(scenario, results, roster_by_id)
+    else:
+        raise RecommendationError("当前版本暂只支持单关和双关推荐。")
 
     return {
         "scenario": {
@@ -525,8 +597,9 @@ def build_recommendation(scenario: dict[str, Any], roster_payload: Any) -> dict[
         "meta": {
             "rosterSize": len(roster_units),
             "evaluatedTeams": len(all_combos),
-            "topTeamCandidates": len(top_candidates),
-            "bottomTeamCandidates": len(bottom_candidates),
+            "topTeamCandidates": stage_candidate_counts[0]["count"] if len(stage_candidate_counts) >= 1 else 0,
+            "bottomTeamCandidates": stage_candidate_counts[1]["count"] if len(stage_candidate_counts) >= 2 else 0,
+            "stageCandidateCounts": stage_candidate_counts,
             "detailedRelicUnits": detailed_relic_units,
             "parsedRelicDetailUnits": parsed_relic_detail_units,
             "search": search_meta,
