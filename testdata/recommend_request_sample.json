@@ -1,0 +1,87 @@
+{
+  "scenarioId": "moc_debuff_break",
+  "roster": {
+    "playerName": "Repo JSON Test",
+    "avatars": [
+      {
+        "name": "黑天鹅",
+        "level": 80,
+        "eidolon": 0,
+        "traceScore": 0.84,
+        "relicScore": 0.86
+      },
+      {
+        "characterName": "Kafka",
+        "level": 80,
+        "eidolon": 0,
+        "traceScore": 88,
+        "relicScore": 84,
+        "signature": true
+      },
+      {
+        "avatarName": "Ruan Mei",
+        "level": 80,
+        "eidolon": 0,
+        "traces": {
+          "basic": 6,
+          "skill": 10,
+          "ultimate": 10,
+          "talent": 10
+        },
+        "lightConeScore": 0.78,
+        "relicScore": 8.8
+      },
+      {
+        "id": "huohuo",
+        "level": 80,
+        "eidolon": 0,
+        "traceScore": 0.82,
+        "relicScore": 74
+      },
+      {
+        "key": "pela",
+        "level": 80,
+        "e": 6,
+        "skills": [
+          {
+            "level": 6
+          },
+          {
+            "level": 10
+          },
+          {
+            "level": 10
+          },
+          {
+            "level": 10
+          }
+        ],
+        "buildScore": 0.72
+      },
+      {
+        "characterId": "firefly",
+        "level": 80,
+        "eidolon": 0,
+        "traceScore": 0.87,
+        "relicScore": 0.9,
+        "lightCone": {
+          "signature": true
+        }
+      },
+      {
+        "displayName": "同谐开拓者",
+        "level": 80,
+        "eidolon": 6,
+        "traceScore": 0.82,
+        "relicScore": 0.71
+      },
+      {
+        "name": "Gallagher",
+        "level": 80,
+        "eidolon": 6,
+        "traceScore": 0.78,
+        "relicScore": 0.7
+      }
+    ]
+  }
+}

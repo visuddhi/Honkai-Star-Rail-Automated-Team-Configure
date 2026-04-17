@@ -90,7 +90,9 @@ body {
 .tip-card,
 .result-card,
 .team-card li,
-.alternatives li {
+.alternatives li,
+.simulation-card p,
+.simulation-card li {
   color: var(--muted);
 }
 
@@ -105,7 +107,10 @@ body {
 .status-card,
 .result-card,
 .team-card,
-.alternative-card {
+.alternative-card,
+.simulation-card,
+.sim-profile,
+.sim-half {
   background: rgba(255, 255, 255, 0.04);
   border: 1px solid rgba(255, 255, 255, 0.08);
   border-radius: 18px;
@@ -121,7 +126,9 @@ body {
 .field-head span,
 .meta-chip span,
 .team-card h4,
-.alternative-card h4 {
+.alternative-card h4,
+.simulation-stat span,
+.sim-profile-score span {
   display: block;
   color: var(--accent);
   font-size: 0.8rem;
@@ -233,7 +240,10 @@ textarea {
 .status-card,
 .result-card,
 .team-card,
-.alternative-card {
+.alternative-card,
+.simulation-card,
+.sim-profile,
+.sim-half {
   padding: 16px 18px;
 }
 
@@ -241,6 +251,10 @@ textarea {
 .tip-card h3 {
   margin-top: 0;
   color: var(--text);
+}
+
+.tip-card p {
+  margin-top: 0;
 }
 
 .scenario-card ul,
@@ -334,10 +348,120 @@ textarea {
 }
 
 .teams,
-.alternatives {
+.alternatives,
+.simulation-profiles {
   display: grid;
   gap: 12px;
   margin-top: 14px;
+}
+
+.simulation {
+  margin-top: 14px;
+}
+
+.simulation-card {
+  background: rgba(255, 255, 255, 0.035);
+}
+
+.simulation-header,
+.sim-profile-header,
+.sim-half-head {
+  display: flex;
+  justify-content: space-between;
+  gap: 12px;
+  align-items: start;
+}
+
+.simulation-header h4,
+.sim-profile h5 {
+  margin: 0;
+  color: var(--text);
+  font-family: Georgia, serif;
+}
+
+.simulation-header p,
+.sim-description {
+  margin: 8px 0 0;
+}
+
+.simulation-overview {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(86px, 1fr));
+  gap: 8px;
+}
+
+.simulation-stat,
+.sim-profile-meta span,
+.sim-metrics span {
+  padding: 8px 10px;
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.simulation-stat strong,
+.sim-profile-score strong {
+  display: block;
+  margin-top: 4px;
+  color: var(--text);
+}
+
+.sim-profile-score {
+  min-width: 92px;
+  text-align: right;
+}
+
+.sim-description {
+  max-width: 420px;
+}
+
+.sim-profile-meta {
+  margin-top: 12px;
+}
+
+.sim-halves {
+  display: grid;
+  gap: 10px;
+  margin-top: 12px;
+}
+
+.sim-half strong {
+  color: var(--text);
+}
+
+.sim-metrics {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-top: 12px;
+}
+
+.sim-half ul,
+.simulation-notes {
+  margin: 12px 0 0;
+  padding-left: 18px;
+}
+
+.sim-risk {
+  padding: 6px 10px;
+  border-radius: 999px;
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  font-size: 0.82rem;
+}
+
+.sim-risk.good {
+  color: #cbf6dc;
+  background: rgba(76, 195, 132, 0.16);
+}
+
+.sim-risk.mid {
+  color: #ffe3b8;
+  background: rgba(240, 185, 108, 0.16);
+}
+
+.sim-risk.bad {
+  color: #ffd4cb;
+  background: rgba(255, 154, 139, 0.14);
 }
 
 .team-card header,
@@ -404,5 +528,19 @@ textarea {
   .result-panel,
   .hero {
     padding: 18px;
+  }
+
+  .simulation-overview {
+    grid-template-columns: 1fr;
+  }
+
+  .simulation-header,
+  .sim-profile-header,
+  .sim-half-head {
+    flex-direction: column;
+  }
+
+  .sim-profile-score {
+    text-align: left;
   }
 }

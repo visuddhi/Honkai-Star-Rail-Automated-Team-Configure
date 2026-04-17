@@ -5,6 +5,7 @@ from itertools import combinations
 from typing import Any
 
 from src.data_loader import parse_roster_payload
+from src.simulator import attach_simulations
 
 TRAIT_LABELS = {
     "aoe": "对群",
@@ -436,6 +437,8 @@ def build_recommendation(scenario: dict[str, Any], roster_payload: Any) -> dict[
             },
         ]
 
+    simulation_meta = attach_simulations(scenario, results, roster_by_id)
+
     return {
         "scenario": {
             "id": scenario["id"],
@@ -452,5 +455,6 @@ def build_recommendation(scenario: dict[str, Any], roster_payload: Any) -> dict[
             "bottomTeamCandidates": len(bottom_candidates),
             "skipped": skipped,
         },
+        "simulationMeta": simulation_meta,
         "results": results,
     }

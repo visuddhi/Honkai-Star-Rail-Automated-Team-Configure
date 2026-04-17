@@ -84,13 +84,18 @@ function renderScenarioCard() {
   `;
 }
 
-function renderMeta(meta) {
+function renderMeta(meta, simulationMeta = null) {
   const items = [
     ["识别角色", `${meta.rosterSize}`],
     ["枚举队伍", `${meta.evaluatedTeams}`],
     ["上半候选", `${meta.topTeamCandidates}`],
     ["下半候选", `${meta.bottomTeamCandidates}`],
   ];
+
+  if (simulationMeta?.simulatedResults) {
+    items.push(["回合模拟", `Top ${simulationMeta.simulatedResults}`]);
+    items.push(["单队抽样", `${simulationMeta.runsPerResult} 次`]);
+  }
 
   metaStrip.innerHTML = items
     .map(
@@ -102,6 +107,105 @@ function renderMeta(meta) {
       `
     )
     .join("");
+}
+
+function formatPercent(value) {
+  return `${Math.round((value || 0) * 100)}%`;
+}
+
+function riskClass(label) {
+  if (label === "稳定") {
+    return "good";
+  }
+  if (label === "可接受") {
+    return "mid";
+  }
+  return "bad";
+}
+
+function renderSimulation(simulation) {
+  if (!simulation) {
+    return "";
+  }
+
+  const overview = simulation.overall || {};
+  const overviewItems = [
+    ["双清率", formatPercent(overview.pairClearRate)],
+    ["均分", `${overview.averagePairScore ?? "-"}`],
+    ["波动区间", `${overview.minPairScore ?? "-"} - ${overview.maxPairScore ?? "-"}`],
+  ];
+
+  const profiles = (simulation.profiles || [])
+    .map(
+      (profile) => `
+        <article class="sim-profile">
+          <header class="sim-profile-header">
+            <div>
+              <h5>${profile.label}</h5>
+              <p class="sim-description">${profile.description}</p>
+            </div>
+            <div class="sim-profile-score">
+              <strong>${profile.pairScore}</strong>
+              <span>${profile.bothCleared ? "双清" : "未稳定双清"}</span>
+            </div>
+          </header>
+          <div class="sim-profile-meta">
+            <span>等效轮次 ${profile.pairCycles}</span>
+          </div>
+          <div class="sim-halves">
+            ${profile.halves
+              .map(
+                (half) => `
+                  <section class="sim-half">
+                    <div class="sim-half-head">
+                      <strong>${half.half}</strong>
+                      <span class="sim-risk ${riskClass(half.riskLabel)}">${half.riskLabel}</span>
+                    </div>
+                    <div class="sim-metrics">
+                      <span>半场 ${half.score}</span>
+                      <span>轮次 ${half.cycleEquivalent}</span>
+                      <span>敌动 ${half.enemyTurns}</span>
+                      <span>破韧 ${half.breaks}</span>
+                    </div>
+                    <ul>
+                      ${(half.keyMoments || []).map((item) => `<li>${item}</li>`).join("")}
+                    </ul>
+                  </section>
+                `
+              )
+              .join("")}
+          </div>
+        </article>
+      `
+    )
+    .join("");
+
+  const notes = (simulation.notes || []).map((note) => `<li>${note}</li>`).join("");
+
+  return `
+    <section class="simulation-card">
+      <header class="simulation-header">
+        <div>
+          <h4>回合模拟原型</h4>
+          <p>当前版本会对 Top 结果抽样 ${simulation.runs} 次，并同时展示普通 / 最差 / 最佳随机视角。</p>
+        </div>
+        <div class="simulation-overview">
+          ${overviewItems
+            .map(
+              ([label, value]) => `
+                <div class="simulation-stat">
+                  <span>${label}</span>
+                  <strong>${value}</strong>
+                </div>
+              `
+            )
+            .join("")}
+        </div>
+      </header>
+      <div class="simulation-profiles">${profiles}</div>
+      ${notes ? `<ul class="simulation-notes">${notes}</ul>` : ""}
+    </section>
+  `;
 }
 
 function renderAlternatives(alternatives) {
@@ -166,6 +270,7 @@ function renderResults(results) {
       )
       .join("");
 
+    node.querySelector(".simulation").innerHTML = renderSimulation(result.simulation);
     node.querySelector(".alternatives").innerHTML = renderAlternatives(result.alternatives);
     resultsEl.appendChild(node);
   });
@@ -202,8 +307,10 @@ async function submitRecommendation() {
 
     const skipped = payload.meta.skipped || [];
     const skippedText = skipped.length ? ` 有 ${skipped.length} 条角色记录未识别。` : "";
-    setStatus(`已生成 ${payload.results.length} 套候选。${skippedText}`);
-    renderMeta(payload.meta);
+    const simCount = payload.simulationMeta?.simulatedResults || 0;
+    const simText = simCount ? ` 已对 Top ${simCount} 跑回合模拟。` : "";
+    setStatus(`已生成 ${payload.results.length} 套候选。${skippedText}${simText}`);
+    renderMeta(payload.meta, payload.simulationMeta);
     renderResults(payload.results);
   } catch (error) {
     setStatus(error.message || "生成推荐失败。", "error");
