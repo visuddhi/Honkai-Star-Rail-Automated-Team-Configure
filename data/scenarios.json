@@ -1,0 +1,270 @@
+[
+  {
+    "id": "moc_debuff_break",
+    "mode": "memory_of_chaos",
+    "modeLabel": "混沌回忆",
+    "name": "混沌回忆样例：减益上半 / 击破下半",
+    "cycle": "Prototype Cycle A",
+    "description": "上半偏好多波次清杂与减益覆盖，下半更像高韧性 Boss 压力测试。",
+    "buffs": [
+      "本期回忆紊流偏爱高频施加减益的队伍。",
+      "下半敌人韧性厚，削韧效率越高越容易压缩轮次。"
+    ],
+    "halves": [
+      {
+        "key": "top",
+        "name": "上半",
+        "enemySummary": "多波次精英 + 召唤物，偏雷 / 风 / 量子弱点",
+        "preferredElements": ["雷", "风", "量子"],
+        "weights": {
+          "aoe": 12,
+          "single": 8,
+          "debuff": 14,
+          "speed": 8,
+          "survival": 10,
+          "break": 6,
+          "dot": 4,
+          "support": 6
+        },
+        "targets": {
+          "aoe": 18,
+          "single": 14,
+          "debuff": 14,
+          "speed": 12,
+          "survival": 10,
+          "break": 10,
+          "dot": 8,
+          "support": 12
+        },
+        "requireSustain": true,
+        "notes": [
+          "优先考虑双虚无或能稳定挂减益的队伍。",
+          "如果清杂速度不够，轮次压力会明显上升。"
+        ]
+      },
+      {
+        "key": "bottom",
+        "name": "下半",
+        "enemySummary": "高韧性 Boss，偏火 / 物理 / 虚数弱点",
+        "preferredElements": ["火", "物理", "虚数"],
+        "weights": {
+          "single": 14,
+          "break": 16,
+          "speed": 10,
+          "survival": 10,
+          "aoe": 4,
+          "support": 6
+        },
+        "targets": {
+          "single": 16,
+          "break": 16,
+          "speed": 12,
+          "survival": 10,
+          "aoe": 8,
+          "support": 12
+        },
+        "requireSustain": true,
+        "notes": [
+          "偏向击破队或高质量对单队。",
+          "队伍若没有足够行动节奏，容易把击破窗口拉长。"
+        ]
+      }
+    ]
+  },
+  {
+    "id": "moc_followup_split",
+    "mode": "memory_of_chaos",
+    "modeLabel": "混沌回忆",
+    "name": "混沌回忆样例：追击上半 / 单核下半",
+    "cycle": "Prototype Cycle B",
+    "description": "上半希望快速压掉杂兵和召唤物，下半则更看重稳定单核爆发。",
+    "buffs": [
+      "追击与额外出手会得到额外收益。",
+      "下半更奖励单体斩杀能力与节奏控制。"
+    ],
+    "halves": [
+      {
+        "key": "top",
+        "name": "上半",
+        "enemySummary": "多目标精英战，偏火 / 冰 / 虚数弱点",
+        "preferredElements": ["火", "冰", "虚数"],
+        "weights": {
+          "aoe": 14,
+          "fua": 12,
+          "speed": 8,
+          "survival": 8,
+          "break": 6,
+          "support": 6
+        },
+        "targets": {
+          "aoe": 18,
+          "fua": 12,
+          "speed": 12,
+          "survival": 10,
+          "break": 10,
+          "support": 10
+        },
+        "requireSustain": true,
+        "notes": [
+          "对群和追击权重较高。",
+          "如果打点过于偏单体，上半会明显拖回合。"
+        ]
+      },
+      {
+        "key": "bottom",
+        "name": "下半",
+        "enemySummary": "高血量单 Boss，偏雷 / 风 / 量子弱点",
+        "preferredElements": ["雷", "风", "量子"],
+        "weights": {
+          "single": 16,
+          "speed": 10,
+          "debuff": 10,
+          "survival": 10,
+          "support": 8
+        },
+        "targets": {
+          "single": 16,
+          "speed": 12,
+          "debuff": 12,
+          "survival": 10,
+          "support": 12
+        },
+        "requireSustain": true,
+        "notes": [
+          "稳定单核和双辅助结构会更舒服。",
+          "下半更考验对单压制和行动顺序。"
+        ]
+      }
+    ]
+  },
+  {
+    "id": "pure_fiction_aoe",
+    "mode": "pure_fiction",
+    "modeLabel": "虚构叙事",
+    "name": "虚构叙事样例：清杂竞速",
+    "cycle": "Prototype PF",
+    "description": "两边都更重视清杂效率和滚雪球能力，生存不是第一优先级。",
+    "buffs": [
+      "高频追击、持续伤害和范围伤害都有明显收益。",
+      "过度保守的双生存结构通常会损失分数。"
+    ],
+    "halves": [
+      {
+        "key": "top",
+        "name": "上半",
+        "enemySummary": "大量中低血量敌人，偏火 / 冰弱点",
+        "preferredElements": ["火", "冰"],
+        "weights": {
+          "aoe": 18,
+          "fua": 12,
+          "speed": 10,
+          "survival": 4,
+          "support": 8
+        },
+        "targets": {
+          "aoe": 20,
+          "fua": 12,
+          "speed": 12,
+          "survival": 6,
+          "support": 10
+        },
+        "requireSustain": false,
+        "notes": [
+          "偏好黑塔 / 姬子一类清杂核心。",
+          "如果只能带一个生存位，最好别牺牲太多对群效率。"
+        ]
+      },
+      {
+        "key": "bottom",
+        "name": "下半",
+        "enemySummary": "多波次杂兵，偏雷 / 风弱点",
+        "preferredElements": ["雷", "风"],
+        "weights": {
+          "aoe": 16,
+          "dot": 12,
+          "speed": 10,
+          "debuff": 8,
+          "survival": 4,
+          "support": 8
+        },
+        "targets": {
+          "aoe": 18,
+          "dot": 12,
+          "speed": 12,
+          "debuff": 10,
+          "survival": 6,
+          "support": 10
+        },
+        "requireSustain": false,
+        "notes": [
+          "DoT 清杂和高频出手会更舒服。",
+          "生存只要过线，不需要像混沌一样堆太满。"
+        ]
+      }
+    ]
+  },
+  {
+    "id": "apocalyptic_shadow_break",
+    "mode": "apocalyptic_shadow",
+    "modeLabel": "末日幻影",
+    "name": "末日幻影样例：双 Boss 击破考题",
+    "cycle": "Prototype AS",
+    "description": "两边都更接近 Boss Rush，重点是削韧、机制处理和单体爆发。",
+    "buffs": [
+      "高质量击破能显著改善输出窗口。",
+      "如果主 C 和辅助节奏错位，分数会明显下滑。"
+    ],
+    "halves": [
+      {
+        "key": "top",
+        "name": "上半",
+        "enemySummary": "单 Boss，偏火 / 物理弱点",
+        "preferredElements": ["火", "物理"],
+        "weights": {
+          "single": 14,
+          "break": 16,
+          "speed": 10,
+          "survival": 10,
+          "support": 8
+        },
+        "targets": {
+          "single": 16,
+          "break": 16,
+          "speed": 12,
+          "survival": 10,
+          "support": 12
+        },
+        "requireSustain": true,
+        "notes": [
+          "击破成型队会更有优势。",
+          "如果削韧明显不够，战斗会被拖长。"
+        ]
+      },
+      {
+        "key": "bottom",
+        "name": "下半",
+        "enemySummary": "单 Boss，偏雷 / 虚数 / 量子弱点",
+        "preferredElements": ["雷", "虚数", "量子"],
+        "weights": {
+          "single": 14,
+          "debuff": 12,
+          "speed": 10,
+          "survival": 10,
+          "support": 8
+        },
+        "targets": {
+          "single": 16,
+          "debuff": 12,
+          "speed": 12,
+          "survival": 10,
+          "support": 12
+        },
+        "requireSustain": true,
+        "notes": [
+          "高质量减益单核会是很稳的一条路。",
+          "对单节奏和容错都很重要。"
+        ]
+      }
+    ]
+  }
+]

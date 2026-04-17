@@ -1,0 +1,593 @@
+[
+  {
+    "id": "acheron",
+    "name": "黄泉",
+    "aliases": ["Acheron", "黄泉"],
+    "element": "雷",
+    "path": "虚无",
+    "roles": ["main_dps"],
+    "tags": ["nihility", "debuff", "burst"],
+    "traits": {
+      "aoe": 7,
+      "single": 9,
+      "break": 4,
+      "debuff": 10,
+      "dot": 1,
+      "fua": 0,
+      "speed": 4,
+      "survival": 1,
+      "support": 1,
+      "sp": -2
+    },
+    "synergies": [
+      { "with": "pela", "score": 8, "reason": "佩拉补减益和减防，让黄泉更稳定滚起终结技循环。" },
+      { "with": "silver_wolf", "score": 9, "reason": "银狼提供高频减益，黄泉启动与对单压制都会更稳。" },
+      { "with": "black_swan", "score": 5, "reason": "黑天鹅补充额外减益层数，帮助黄泉更快进入爆发窗口。" },
+      { "with": "sparkle", "score": 4, "reason": "花火缓解战技点与行动顺序问题，提升爆发轴稳定性。" }
+    ]
+  },
+  {
+    "id": "black_swan",
+    "name": "黑天鹅",
+    "aliases": ["Black Swan", "黑天鹅"],
+    "element": "风",
+    "path": "虚无",
+    "roles": ["sub_dps", "support"],
+    "tags": ["nihility", "debuff", "dot"],
+    "traits": {
+      "aoe": 7,
+      "single": 6,
+      "break": 4,
+      "debuff": 9,
+      "dot": 9,
+      "fua": 0,
+      "speed": 4,
+      "survival": 1,
+      "support": 3,
+      "sp": 0
+    },
+    "synergies": [
+      { "with": "kafka", "score": 10, "reason": "黑天鹅和卡芙卡能形成最完整的 DoT 引爆链。" },
+      { "with": "ruan_mei", "score": 4, "reason": "阮梅补速与击破收益，DoT 队整体节奏更顺。" },
+      { "with": "acheron", "score": 5, "reason": "额外减益覆盖让黄泉更容易叠层。" }
+    ]
+  },
+  {
+    "id": "kafka",
+    "name": "卡芙卡",
+    "aliases": ["Kafka", "卡芙卡"],
+    "element": "雷",
+    "path": "虚无",
+    "roles": ["main_dps"],
+    "tags": ["nihility", "dot"],
+    "traits": {
+      "aoe": 8,
+      "single": 6,
+      "break": 4,
+      "debuff": 6,
+      "dot": 10,
+      "fua": 0,
+      "speed": 5,
+      "survival": 1,
+      "support": 1,
+      "sp": -1
+    },
+    "synergies": [
+      { "with": "black_swan", "score": 10, "reason": "卡芙卡和黑天鹅的持续伤害链条非常完整。" },
+      { "with": "ruan_mei", "score": 5, "reason": "阮梅能补速、增伤和击破窗口，DoT 队上限更高。" },
+      { "with": "huohuo", "score": 4, "reason": "藿藿提高容错并补能量，让卡芙卡循环更稳定。" }
+    ]
+  },
+  {
+    "id": "ruan_mei",
+    "name": "阮·梅",
+    "aliases": ["Ruan Mei", "阮梅", "阮·梅"],
+    "element": "冰",
+    "path": "同谐",
+    "roles": ["support"],
+    "tags": ["break", "speed", "universal"],
+    "traits": {
+      "aoe": 1,
+      "single": 1,
+      "break": 9,
+      "debuff": 2,
+      "dot": 0,
+      "fua": 0,
+      "speed": 8,
+      "survival": 1,
+      "support": 10,
+      "sp": 1
+    },
+    "synergies": [
+      { "with": "firefly", "score": 9, "reason": "阮梅把流萤的击破收益和轮转质量都抬得很高。" },
+      { "with": "boothill", "score": 8, "reason": "阮梅让波提欧的削韧和出手效率更接近成型状态。" },
+      { "with": "trailblazer_harmony", "score": 5, "reason": "双击破辅助叠在一起，能明显放大击破队上限。" },
+      { "with": "kafka", "score": 5, "reason": "对 DoT 队来说，阮梅是通用的节奏与伤害放大器。" }
+    ]
+  },
+  {
+    "id": "robin",
+    "name": "罗宾",
+    "aliases": ["Robin", "罗宾"],
+    "element": "物理",
+    "path": "同谐",
+    "roles": ["support"],
+    "tags": ["speed", "fua", "team_buff"],
+    "traits": {
+      "aoe": 2,
+      "single": 2,
+      "break": 2,
+      "debuff": 0,
+      "dot": 0,
+      "fua": 8,
+      "speed": 9,
+      "survival": 1,
+      "support": 10,
+      "sp": 0
+    },
+    "synergies": [
+      { "with": "topaz", "score": 8, "reason": "罗宾和托帕能把追击体系的爆发窗口抬得很高。" },
+      { "with": "dr_ratio", "score": 7, "reason": "罗宾能提高真理医生的追击与爆发效率。" },
+      { "with": "himeko", "score": 5, "reason": "罗宾补足姬子的清场节奏，让虚构表现更稳定。" },
+      { "with": "herta", "score": 5, "reason": "罗宾能把黑塔的清杂循环拉得更顺。" }
+    ]
+  },
+  {
+    "id": "sparkle",
+    "name": "花火",
+    "aliases": ["Sparkle", "花火"],
+    "element": "量子",
+    "path": "同谐",
+    "roles": ["support"],
+    "tags": ["hypercarry", "speed", "sp"],
+    "traits": {
+      "aoe": 1,
+      "single": 1,
+      "break": 1,
+      "debuff": 0,
+      "dot": 0,
+      "fua": 0,
+      "speed": 9,
+      "survival": 1,
+      "support": 9,
+      "sp": 3
+    },
+    "synergies": [
+      { "with": "acheron", "score": 4, "reason": "花火能缓解黄泉队的战技点压力并补节奏。" },
+      { "with": "jingliu", "score": 8, "reason": "花火能很好地抬高镜流的爆发密度。" },
+      { "with": "dr_ratio", "score": 4, "reason": "花火让真理医生更容易把伤害窗口压在关键回合。" }
+    ]
+  },
+  {
+    "id": "pela",
+    "name": "佩拉",
+    "aliases": ["Pela", "佩拉"],
+    "element": "冰",
+    "path": "虚无",
+    "roles": ["support"],
+    "tags": ["debuff", "nihility"],
+    "traits": {
+      "aoe": 2,
+      "single": 2,
+      "break": 2,
+      "debuff": 8,
+      "dot": 0,
+      "fua": 0,
+      "speed": 6,
+      "survival": 1,
+      "support": 6,
+      "sp": 1
+    },
+    "synergies": [
+      { "with": "acheron", "score": 8, "reason": "佩拉的减防与频繁减益让黄泉更容易稳定成型。" },
+      { "with": "dr_ratio", "score": 4, "reason": "佩拉提供减益覆盖，能让真理医生稳定吃到额外收益。" }
+    ]
+  },
+  {
+    "id": "silver_wolf",
+    "name": "银狼",
+    "aliases": ["Silver Wolf", "银狼"],
+    "element": "量子",
+    "path": "虚无",
+    "roles": ["support"],
+    "tags": ["debuff", "nihility", "single_target"],
+    "traits": {
+      "aoe": 1,
+      "single": 3,
+      "break": 5,
+      "debuff": 9,
+      "dot": 0,
+      "fua": 0,
+      "speed": 6,
+      "survival": 1,
+      "support": 6,
+      "sp": 0
+    },
+    "synergies": [
+      { "with": "acheron", "score": 9, "reason": "银狼是黄泉对单环境里最直接的高价值减益位之一。" },
+      { "with": "dr_ratio", "score": 8, "reason": "银狼提供多段减益，真理医生触发条件更轻松。" }
+    ]
+  },
+  {
+    "id": "huohuo",
+    "name": "藿藿",
+    "aliases": ["Huohuo", "藿藿"],
+    "element": "风",
+    "path": "丰饶",
+    "roles": ["sustain"],
+    "tags": ["heal", "energy", "cleanse"],
+    "traits": {
+      "aoe": 1,
+      "single": 1,
+      "break": 1,
+      "debuff": 0,
+      "dot": 0,
+      "fua": 0,
+      "speed": 6,
+      "survival": 8,
+      "support": 6,
+      "sp": 0
+    },
+    "synergies": [
+      { "with": "kafka", "score": 4, "reason": "藿藿给 DoT 队补充循环与续航，整体轮转更稳定。" },
+      { "with": "jingliu", "score": 5, "reason": "藿藿能兼顾镜流队的续航和爆发回转。" }
+    ]
+  },
+  {
+    "id": "aventurine",
+    "name": "砂金",
+    "aliases": ["Aventurine", "砂金"],
+    "element": "虚数",
+    "path": "存护",
+    "roles": ["sustain"],
+    "tags": ["shield", "fua", "comfort"],
+    "traits": {
+      "aoe": 2,
+      "single": 1,
+      "break": 2,
+      "debuff": 1,
+      "dot": 0,
+      "fua": 4,
+      "speed": 4,
+      "survival": 10,
+      "support": 4,
+      "sp": 1
+    },
+    "synergies": [
+      { "with": "dr_ratio", "score": 4, "reason": "砂金让真理医生追击队的生存和节奏都更舒服。" },
+      { "with": "topaz", "score": 3, "reason": "砂金本身能补追击体系的额外命中与容错。" }
+    ]
+  },
+  {
+    "id": "gallagher",
+    "name": "加拉赫",
+    "aliases": ["Gallagher", "加拉赫"],
+    "element": "火",
+    "path": "丰饶",
+    "roles": ["sustain"],
+    "tags": ["break", "heal", "debuff"],
+    "traits": {
+      "aoe": 2,
+      "single": 2,
+      "break": 7,
+      "debuff": 3,
+      "dot": 2,
+      "fua": 0,
+      "speed": 5,
+      "survival": 7,
+      "support": 4,
+      "sp": 1
+    },
+    "synergies": [
+      { "with": "firefly", "score": 7, "reason": "加拉赫是流萤击破队里非常高性价比的生存位。" },
+      { "with": "trailblazer_harmony", "score": 4, "reason": "击破体系里，加拉赫能顺手补减益和额外削韧。" },
+      { "with": "boothill", "score": 6, "reason": "加拉赫能较好匹配波提欧队的削韧节奏。" }
+    ]
+  },
+  {
+    "id": "fu_xuan",
+    "name": "符玄",
+    "aliases": ["Fu Xuan", "符玄"],
+    "element": "量子",
+    "path": "存护",
+    "roles": ["sustain"],
+    "tags": ["mitigation", "comfort"],
+    "traits": {
+      "aoe": 1,
+      "single": 1,
+      "break": 1,
+      "debuff": 0,
+      "dot": 0,
+      "fua": 0,
+      "speed": 4,
+      "survival": 10,
+      "support": 5,
+      "sp": 0
+    },
+    "synergies": [
+      { "with": "acheron", "score": 2, "reason": "符玄能提高黄泉队的容错，适合高压环境稳通。" },
+      { "with": "jingliu", "score": 3, "reason": "符玄为镜流队提供稳健的生存下限。" }
+    ]
+  },
+  {
+    "id": "firefly",
+    "name": "流萤",
+    "aliases": ["Firefly", "流萤"],
+    "element": "火",
+    "path": "毁灭",
+    "roles": ["main_dps"],
+    "tags": ["break", "hypercarry"],
+    "traits": {
+      "aoe": 6,
+      "single": 9,
+      "break": 10,
+      "debuff": 1,
+      "dot": 0,
+      "fua": 0,
+      "speed": 7,
+      "survival": 2,
+      "support": 0,
+      "sp": -1
+    },
+    "synergies": [
+      { "with": "ruan_mei", "score": 9, "reason": "阮梅是流萤队里最稳定的高价值击破辅助。" },
+      { "with": "trailblazer_harmony", "score": 10, "reason": "同谐主和流萤组成击破体系核心闭环。" },
+      { "with": "gallagher", "score": 7, "reason": "加拉赫能在击破框架下提供高契合度生存。" }
+    ]
+  },
+  {
+    "id": "boothill",
+    "name": "波提欧",
+    "aliases": ["Boothill", "波提欧"],
+    "element": "物理",
+    "path": "巡猎",
+    "roles": ["main_dps"],
+    "tags": ["break", "single_target"],
+    "traits": {
+      "aoe": 3,
+      "single": 10,
+      "break": 10,
+      "debuff": 1,
+      "dot": 0,
+      "fua": 0,
+      "speed": 7,
+      "survival": 1,
+      "support": 0,
+      "sp": -1
+    },
+    "synergies": [
+      { "with": "ruan_mei", "score": 8, "reason": "阮梅能大幅改善波提欧的击破效率与输出窗口。" },
+      { "with": "bronya", "score": 7, "reason": "布洛妮娅让波提欧对单斩杀线更容易被拉到位。" },
+      { "with": "gallagher", "score": 6, "reason": "加拉赫能补上击破队急需的续航与协同削韧。" }
+    ]
+  },
+  {
+    "id": "himeko",
+    "name": "姬子",
+    "aliases": ["Himeko", "姬子"],
+    "element": "火",
+    "path": "智识",
+    "roles": ["main_dps"],
+    "tags": ["aoe", "fua"],
+    "traits": {
+      "aoe": 10,
+      "single": 4,
+      "break": 5,
+      "debuff": 0,
+      "dot": 0,
+      "fua": 9,
+      "speed": 4,
+      "survival": 1,
+      "support": 0,
+      "sp": 0
+    },
+    "synergies": [
+      { "with": "herta", "score": 10, "reason": "姬子和黑塔在虚构里能形成非常稳定的清场联动。" },
+      { "with": "robin", "score": 5, "reason": "罗宾能进一步放大姬子的清杂速度和追击收益。" }
+    ]
+  },
+  {
+    "id": "herta",
+    "name": "黑塔",
+    "aliases": ["Herta", "黑塔"],
+    "element": "冰",
+    "path": "智识",
+    "roles": ["main_dps"],
+    "tags": ["aoe", "fua"],
+    "traits": {
+      "aoe": 10,
+      "single": 3,
+      "break": 2,
+      "debuff": 0,
+      "dot": 0,
+      "fua": 8,
+      "speed": 4,
+      "survival": 1,
+      "support": 0,
+      "sp": 0
+    },
+    "synergies": [
+      { "with": "himeko", "score": 10, "reason": "黑塔和姬子是经典虚构清杂双核。" },
+      { "with": "robin", "score": 5, "reason": "罗宾的团队增益能很好地放大黑塔的滚雪球能力。" }
+    ]
+  },
+  {
+    "id": "tingyun",
+    "name": "停云",
+    "aliases": ["Tingyun", "停云"],
+    "element": "雷",
+    "path": "同谐",
+    "roles": ["support"],
+    "tags": ["energy", "hypercarry"],
+    "traits": {
+      "aoe": 1,
+      "single": 1,
+      "break": 1,
+      "debuff": 0,
+      "dot": 0,
+      "fua": 0,
+      "speed": 7,
+      "survival": 1,
+      "support": 8,
+      "sp": 1
+    },
+    "synergies": [
+      { "with": "jingliu", "score": 6, "reason": "停云是镜流单核队里很稳的泛用辅助位。" },
+      { "with": "dr_ratio", "score": 3, "reason": "停云能提高真理医生关键回合的爆发密度。" }
+    ]
+  },
+  {
+    "id": "bronya",
+    "name": "布洛妮娅",
+    "aliases": ["Bronya", "布洛妮娅"],
+    "element": "风",
+    "path": "同谐",
+    "roles": ["support"],
+    "tags": ["action_advance", "hypercarry"],
+    "traits": {
+      "aoe": 1,
+      "single": 2,
+      "break": 1,
+      "debuff": 0,
+      "dot": 0,
+      "fua": 0,
+      "speed": 9,
+      "survival": 1,
+      "support": 9,
+      "sp": -1
+    },
+    "synergies": [
+      { "with": "boothill", "score": 7, "reason": "布洛妮娅大幅提高波提欧的对单爆发与轮次效率。" },
+      { "with": "jingliu", "score": 8, "reason": "布洛妮娅是镜流经典高价值拉条辅助。" }
+    ]
+  },
+  {
+    "id": "dr_ratio",
+    "name": "真理医生",
+    "aliases": ["Dr. Ratio", "Ratio", "真理医生"],
+    "element": "虚数",
+    "path": "巡猎",
+    "roles": ["main_dps"],
+    "tags": ["single_target", "fua", "debuff"],
+    "traits": {
+      "aoe": 4,
+      "single": 9,
+      "break": 4,
+      "debuff": 5,
+      "dot": 0,
+      "fua": 8,
+      "speed": 5,
+      "survival": 1,
+      "support": 0,
+      "sp": -1
+    },
+    "synergies": [
+      { "with": "silver_wolf", "score": 8, "reason": "银狼让真理医生的触发条件和对单压制都更稳。" },
+      { "with": "topaz", "score": 9, "reason": "托帕和真理医生能组成高质量追击双核。" },
+      { "with": "robin", "score": 7, "reason": "罗宾能把真理医生的追击队伤害窗口明显抬高。" }
+    ]
+  },
+  {
+    "id": "topaz",
+    "name": "托帕&账账",
+    "aliases": ["Topaz", "托帕", "托帕&账账"],
+    "element": "火",
+    "path": "巡猎",
+    "roles": ["sub_dps"],
+    "tags": ["fua", "single_target"],
+    "traits": {
+      "aoe": 5,
+      "single": 7,
+      "break": 3,
+      "debuff": 1,
+      "dot": 0,
+      "fua": 10,
+      "speed": 6,
+      "survival": 1,
+      "support": 2,
+      "sp": 0
+    },
+    "synergies": [
+      { "with": "dr_ratio", "score": 9, "reason": "托帕和真理医生的追击联动非常成熟。" },
+      { "with": "robin", "score": 8, "reason": "罗宾能显著提高托帕体系的追击爆发。" },
+      { "with": "aventurine", "score": 3, "reason": "砂金能补充追击队的舒适度和额外收益。" }
+    ]
+  },
+  {
+    "id": "jingliu",
+    "name": "镜流",
+    "aliases": ["Jingliu", "镜流"],
+    "element": "冰",
+    "path": "毁灭",
+    "roles": ["main_dps"],
+    "tags": ["hypercarry", "blast"],
+    "traits": {
+      "aoe": 8,
+      "single": 8,
+      "break": 3,
+      "debuff": 0,
+      "dot": 0,
+      "fua": 0,
+      "speed": 4,
+      "survival": 1,
+      "support": 0,
+      "sp": -1
+    },
+    "synergies": [
+      { "with": "bronya", "score": 8, "reason": "布洛妮娅能把镜流的爆发窗口抬到更高。" },
+      { "with": "sparkle", "score": 8, "reason": "花火让镜流队在 SP 和节奏上更舒适。" },
+      { "with": "huohuo", "score": 5, "reason": "藿藿补充容错和回转，很适合镜流双辅队。" }
+    ]
+  },
+  {
+    "id": "luocha",
+    "name": "罗刹",
+    "aliases": ["Luocha", "罗刹"],
+    "element": "虚数",
+    "path": "丰饶",
+    "roles": ["sustain"],
+    "tags": ["heal", "comfort", "sp"],
+    "traits": {
+      "aoe": 1,
+      "single": 1,
+      "break": 2,
+      "debuff": 0,
+      "dot": 0,
+      "fua": 0,
+      "speed": 5,
+      "survival": 9,
+      "support": 4,
+      "sp": 1
+    },
+    "synergies": [
+      { "with": "jingliu", "score": 4, "reason": "罗刹能给镜流队提供稳定且不拖节奏的续航。" },
+      { "with": "dr_ratio", "score": 2, "reason": "罗刹是追击对单队的稳健保底生存位。" }
+    ]
+  },
+  {
+    "id": "trailblazer_harmony",
+    "name": "同谐开拓者",
+    "aliases": ["Harmony Trailblazer", "同谐主", "同谐开拓者"],
+    "element": "虚数",
+    "path": "同谐",
+    "roles": ["support"],
+    "tags": ["break", "super_break"],
+    "traits": {
+      "aoe": 2,
+      "single": 2,
+      "break": 8,
+      "debuff": 1,
+      "dot": 0,
+      "fua": 0,
+      "speed": 5,
+      "survival": 1,
+      "support": 7,
+      "sp": 1
+    },
+    "synergies": [
+      { "with": "firefly", "score": 10, "reason": "同谐开拓者是流萤击破体系的核心拼图之一。" },
+      { "with": "ruan_mei", "score": 5, "reason": "同谐主和阮梅能共同放大击破队的上限。" },
+      { "with": "gallagher", "score": 4, "reason": "同谐主和加拉赫在击破体系中的节奏很契合。" }
+    ]
+  }
+]

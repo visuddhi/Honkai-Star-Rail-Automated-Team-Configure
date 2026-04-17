@@ -1,0 +1,122 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>星穹铁道深渊阵容推荐 Prototype</title>
+    <link rel="stylesheet" href="/styles.css" />
+  </head>
+  <body>
+    <div class="backdrop"></div>
+    <main class="shell">
+      <section class="hero panel">
+        <div class="hero-copy">
+          <p class="eyebrow">Honkai: Star Rail · Structured Recommendation</p>
+          <h1>深渊阵容推荐 Prototype</h1>
+          <p class="hero-text">
+            先把它做成一个能跑、能解释、能替换角色的小工具。当前版本用规则评分 +
+            双队组合搜索，目标不是“神谕式 AI”，而是给出一套有逻辑的满星候选。
+          </p>
+        </div>
+        <div class="hero-stats">
+          <div>
+            <span>模式</span>
+            <strong>混沌 / 虚构 / 末日</strong>
+          </div>
+          <div>
+            <span>输入</span>
+            <strong>玩家盒子 JSON</strong>
+          </div>
+          <div>
+            <span>输出</span>
+            <strong>Top 双队 + 原因 + 替补</strong>
+          </div>
+        </div>
+      </section>
+
+      <section class="layout">
+        <aside class="panel control-panel">
+          <div class="section-title">
+            <p class="eyebrow">Step 1</p>
+            <h2>场景与盒子</h2>
+          </div>
+
+          <label class="field">
+            <span>模式</span>
+            <select id="mode-select"></select>
+          </label>
+
+          <label class="field">
+            <span>场景</span>
+            <select id="scenario-select"></select>
+          </label>
+
+          <div id="scenario-card" class="scenario-card"></div>
+
+          <div class="field">
+            <div class="field-head">
+              <span>盒子 JSON</span>
+              <div class="inline-actions">
+                <button id="load-sample" class="ghost-button" type="button">载入示例盒子</button>
+                <label class="ghost-button upload-button">
+                  上传文件
+                  <input id="file-input" type="file" accept=".json,application/json" hidden />
+                </label>
+              </div>
+            </div>
+            <textarea
+              id="roster-input"
+              spellcheck="false"
+              placeholder="把玩家盒子 JSON 粘贴到这里。也可以先点“载入示例盒子”直接试跑。"
+            ></textarea>
+          </div>
+
+          <button id="recommend-button" class="primary-button" type="button">生成推荐</button>
+
+          <div class="tip-card">
+            <h3>支持的简化结构</h3>
+            <pre>{
+  "characters": [
+    {
+      "name": "黄泉",
+      "level": 80,
+      "eidolon": 0,
+      "traceScore": 0.88,
+      "relicScore": 0.9
+    }
+  ]
+}</pre>
+          </div>
+        </aside>
+
+        <section class="panel result-panel">
+          <div class="section-title">
+            <p class="eyebrow">Step 2</p>
+            <h2>推荐结果</h2>
+          </div>
+
+          <div id="status" class="status-card">等待输入盒子并选择场景。</div>
+          <div id="meta" class="meta-strip"></div>
+          <div id="results" class="results"></div>
+        </section>
+      </section>
+    </main>
+
+    <template id="result-template">
+      <article class="result-card">
+        <header class="result-header">
+          <div>
+            <p class="rank"></p>
+            <h3 class="result-score"></h3>
+          </div>
+          <span class="badge"></span>
+        </header>
+        <p class="summary"></p>
+        <div class="teams"></div>
+        <div class="alternatives"></div>
+      </article>
+    </template>
+
+    <script src="/app.js" type="module"></script>
+  </body>
+</html>

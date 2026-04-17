@@ -1,0 +1,141 @@
+{
+  "playerName": "Prototype Trailblazer",
+  "characters": [
+    {
+      "name": "黄泉",
+      "level": 80,
+      "eidolon": 0,
+      "traceScore": 0.88,
+      "relicScore": 0.91,
+      "signature": true
+    },
+    {
+      "name": "黑天鹅",
+      "level": 80,
+      "eidolon": 0,
+      "traceScore": 0.84,
+      "relicScore": 0.86
+    },
+    {
+      "name": "卡芙卡",
+      "level": 80,
+      "eidolon": 0,
+      "traceScore": 0.86,
+      "relicScore": 0.84,
+      "signature": true
+    },
+    {
+      "name": "阮·梅",
+      "level": 80,
+      "eidolon": 0,
+      "traceScore": 0.9,
+      "relicScore": 0.88
+    },
+    {
+      "name": "花火",
+      "level": 80,
+      "eidolon": 0,
+      "traceScore": 0.83,
+      "relicScore": 0.8
+    },
+    {
+      "name": "佩拉",
+      "level": 80,
+      "eidolon": 6,
+      "traceScore": 0.8,
+      "relicScore": 0.72
+    },
+    {
+      "name": "藿藿",
+      "level": 80,
+      "eidolon": 0,
+      "traceScore": 0.82,
+      "relicScore": 0.74
+    },
+    {
+      "name": "砂金",
+      "level": 80,
+      "eidolon": 0,
+      "traceScore": 0.8,
+      "relicScore": 0.81
+    },
+    {
+      "name": "流萤",
+      "level": 80,
+      "eidolon": 0,
+      "traceScore": 0.87,
+      "relicScore": 0.9,
+      "signature": true
+    },
+    {
+      "name": "同谐开拓者",
+      "level": 80,
+      "eidolon": 6,
+      "traceScore": 0.82,
+      "relicScore": 0.71
+    },
+    {
+      "name": "加拉赫",
+      "level": 80,
+      "eidolon": 6,
+      "traceScore": 0.78,
+      "relicScore": 0.7
+    },
+    {
+      "name": "姬子",
+      "level": 80,
+      "eidolon": 1,
+      "traceScore": 0.81,
+      "relicScore": 0.78
+    },
+    {
+      "name": "黑塔",
+      "level": 80,
+      "eidolon": 6,
+      "traceScore": 0.79,
+      "relicScore": 0.76
+    },
+    {
+      "name": "罗宾",
+      "level": 80,
+      "eidolon": 0,
+      "traceScore": 0.86,
+      "relicScore": 0.82
+    },
+    {
+      "name": "真理医生",
+      "level": 80,
+      "eidolon": 0,
+      "traceScore": 0.82,
+      "relicScore": 0.79
+    },
+    {
+      "name": "托帕&账账",
+      "level": 80,
+      "eidolon": 0,
+      "traceScore": 0.8,
+      "relicScore": 0.77
+    },
+    {
+      "name": "银狼",
+      "level": 80,
+      "eidolon": 0,
+      "traceScore": 0.78,
+      "relicScore": 0.74
+    },
+    {
+      "name": "布洛妮娅",
+      "level": 80,
+      "eidolon": 1,
+      "traceScore": 0.8,
+      "relicScore": 0.77
+    },
+    {
+      "name": "波提欧",
+      "level": 80,
+      "eidolon": 0,
+      "traceScore": 0.84,
+      "relicScore": 0.83
+    }
+  ]
+}
